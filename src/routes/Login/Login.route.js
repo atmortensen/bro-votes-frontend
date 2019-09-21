@@ -11,6 +11,7 @@ const View = styled.form`
   width: 100vw;
   height: 100vh;
   background: ${colors.secondaryAccent};
+  position: relative;
 `;
 
 const HeaderContainer = styled.div`
