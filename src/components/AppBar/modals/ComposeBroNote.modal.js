@@ -39,7 +39,11 @@ function ComposeBroNote(props) {
     <Modal open={open}>
       <Modal.Header>Bro Note</Modal.Header>
       <Modal.Content>
-        {error && <Header>{error}</Header>}
+        {error && (
+          <Header as="h4" color="red">
+            {error}
+          </Header>
+        )}
         <Input
           fluid
           onChange={e => setBroNote(e.target.value)}
