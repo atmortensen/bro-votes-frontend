@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import http from 'helpers/http.helper';
 import Login from './Login/Login.route';
@@ -7,7 +7,6 @@ import Home from './Home/Home.route';
 import { BroContext } from 'contexts/Bro.context';
 
 export default () => {
-  const [loading, setLoading] = useState(true);
   const { bro, setBro } = useContext(BroContext);
 
   useEffect(() => {
@@ -19,14 +18,10 @@ export default () => {
         })
         .catch(() => {
           setBro(null);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
+        });
     }
   }, [setBro]);
 
-  if (loading) return null;
   if (!bro) {
     return (
       <Switch>
