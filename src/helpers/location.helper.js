@@ -9,12 +9,15 @@ export function useBroLocation(props) {
       return alert('Your browser is not supported, sorry bro!');
     }
     if (!broLocation) {
-      window.navigator.geolocation.getCurrentPosition(position => {
-        setBroLocation({
-          long: position.coords.longitude,
-          lat: position.coords.latitude
-        });
-      });
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          setBroLocation({
+            long: position.coords.longitude,
+            lat: position.coords.latitude
+          });
+        },
+        () => alert('Location services must be turned on bro.')
+      );
 
       // if (window.navigator.permissions.query) {
       //   window.navigator.permissions
