@@ -10,6 +10,7 @@ const AppBarContainer = styled.div`
   height: 60px;
   background-color: ${colors.secondaryAccent};
   display: flex;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
 const IconContainer = styled.div`

@@ -5,6 +5,7 @@ import { List } from 'semantic-ui-react';
 import moment from 'moment';
 import http from 'helpers/http.helper';
 import { BroNote } from 'components';
+import { colors } from 'helpers/theme.helper';
 
 function Home(props) {
   const [error, setError] = useState('');
@@ -36,11 +37,27 @@ function Home(props) {
   console.log(broNotes);
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: colors.secondary,
+        paddingTop: 60,
+        minHeight: '100vh'
+      }}
+    >
       <AppBar broLocation={broLocation} setSelectedFilter={setSelectedFilter} />
-      <div style={{ marginTop: 60 }}>
+      <div style={{ paddingTop: 8 }}>
         <List divided relaxed>
-          <BroNote />
+          {broNotes.map(note => (
+            <BroNote key={note.id} note={note} />
+          ))}
+          <BroNote
+            key={'test'}
+            note={{
+              note:
+                'I hacked the Statue of Liberty using only HTML, CS, and Vanilla JS',
+              created: moment()
+            }}
+          />
         </List>
       </div>
     </div>
