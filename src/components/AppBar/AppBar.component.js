@@ -25,6 +25,15 @@ function AppBar(props) {
   const [openNewBroNote, setOpenNewBroNote] = useState(false);
   const broLocation = useBroLocation();
 
+  const signThisBroOut = () => {
+    var logBroOut = window.confirm('Bro out?');
+
+    if (logBroOut === true) {
+      window.localStorage.removeItem('token');
+      window.location.reload();
+    }
+  };
+
   return (
     <AppBarContainer>
       <ComposeBroNote
@@ -35,6 +44,7 @@ function AppBar(props) {
       />
       <IconContainer>
         <Icon
+          onClick={signThisBroOut}
           style={{ marginLeft: 16 }}
           inverted
           color="grey"
