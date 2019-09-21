@@ -53,6 +53,7 @@ function Home(props) {
       style={{
         backgroundColor: colors.secondary,
         paddingTop: 60,
+        paddingBottom: 8,
         minHeight: '100vh'
       }}
     >
