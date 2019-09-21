@@ -5,12 +5,19 @@ import { List } from 'semantic-ui-react';
 import http from 'helpers/http.helper';
 import { BroNote } from 'components';
 import { colors } from 'helpers/theme.helper';
+import io from 'socket.io-client';
 
 function Home(props) {
-  const [error, setError] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('new');
   const [broNotes, setBroNotes] = useState([]);
   const broLocation = useBroLocation();
+
+  useEffect(() => {
+    const socket = io.connect(process.env.REACT_APP_API_URL);
+    socket.on('update', getBroNotes);
+
+    return () => socket.off('update');
+  });
 
   const getBroNotes = useCallback(() => {
     if (broLocation) {
@@ -21,7 +28,7 @@ function Home(props) {
         .then(res => {
           setBroNotes(res);
         })
-        .catch(err => setError(err));
+        .catch(err => alert(err));
     }
   }, [broLocation]);
 
