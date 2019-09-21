@@ -57,9 +57,12 @@ function Home(props) {
       />
       <div style={{ paddingTop: 8 }}>
         <List divided relaxed>
-          {broNotes.sort(sortFunction).map(note => (
-            <BroNote key={note._id} note={note} refresh={getBroNotes} />
-          ))}
+          {broNotes
+            .filter(item => selectedFilter !== 'hof' || item.superBroNote)
+            .sort(sortFunction)
+            .map(note => (
+              <BroNote key={note._id} note={note} refresh={getBroNotes} />
+            ))}
         </List>
       </div>
     </div>
