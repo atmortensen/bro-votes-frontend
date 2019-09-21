@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import http from 'helpers/http.helper';
 import Login from './Login/Login.route';
@@ -7,21 +7,16 @@ import Home from './Home/Home.route';
 import { BroContext } from 'contexts/Bro.context';
 
 export default () => {
-  const [loading, setLoading] = useState(false);
   const { bro, setBro } = useContext(BroContext);
 
   useEffect(() => {
     if (window.localStorage.getItem('token')) {
-      setLoading(true);
       http()
         .get(`/bros/me`)
         .then(res => setBro(res))
-        .catch(() => setBro(null))
-        .finally(() => setLoading(false));
+        .catch(() => setBro(null));
     }
   }, [setBro]);
-
-  if (loading) return null;
 
   if (!bro) {
     return (
