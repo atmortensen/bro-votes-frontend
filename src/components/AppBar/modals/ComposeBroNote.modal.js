@@ -23,7 +23,7 @@ function ComposeBroNote(props) {
           onClose();
           refresh();
         })
-        .catch(e => setError(error));
+        .catch(e => setError(e));
     }
   };
 
@@ -54,7 +54,7 @@ function ComposeBroNote(props) {
           style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 16 }}
         >
           <Button onClick={onClose}>cancel</Button>
-          <Button disabled={!broNote} onClick={postBro}>
+          <Button disabled={!broNote} color="yellow" onClick={postBro}>
             submit
           </Button>
         </div>
