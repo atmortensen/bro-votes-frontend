@@ -35,7 +35,7 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  bottom: 15px;
+  bottom: 40px;
 `;
 
 const Logo = styled.img`
