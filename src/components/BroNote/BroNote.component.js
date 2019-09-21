@@ -50,6 +50,7 @@ function BroNote(props) {
   const broCount = note.yaBros.length - note.noBros.length;
 
   const castBroVote = value => {
+    if (note.superBroNote) return;
     http()
       .post(`/bro-votes`, {
         broNoteId: note._id,
