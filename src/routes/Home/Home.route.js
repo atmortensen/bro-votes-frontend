@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useBroLocation } from 'helpers/location.helper';
 import { AppBar } from 'components';
 import { List } from 'semantic-ui-react';
-import moment from 'moment';
 import http from 'helpers/http.helper';
 import { BroNote } from 'components';
 import { colors } from 'helpers/theme.helper';
@@ -26,15 +25,17 @@ function Home(props) {
     }
   }, [broLocation]);
 
-  // const _renderFilter = useCallback(() => {
-  //   broNotes.
-  // }, [selectedFilter]);
+  const sortFunction = (a, b) => {
+    if (selectedFilter === 'new') {
+      a = new Date(a.created);
+      b = new Date(b.created);
+      return a > b ? -1 : 1;
+    }
+  };
 
   useEffect(() => {
     getBroNotes();
   }, [getBroNotes]);
-
-  console.log(broNotes);
 
   return (
     <div
@@ -45,23 +46,16 @@ function Home(props) {
       }}
     >
       <AppBar
+        refresh={getBroNotes}
         broLocation={broLocation}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
       />
       <div style={{ paddingTop: 8 }}>
         <List divided relaxed>
-          {broNotes.map(note => (
-            <BroNote key={note.id} note={note} />
+          {broNotes.sort(sortFunction).map(note => (
+            <BroNote key={note._id} note={note} />
           ))}
-          <BroNote
-            key={'test'}
-            note={{
-              note:
-                'I hacked the Statue of Liberty using only HTML, CS, and Vanilla JS',
-              created: moment()
-            }}
-          />
         </List>
       </div>
     </div>

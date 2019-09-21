@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { colors } from 'helpers/theme.helper';
 import styled from 'styled-components';
+import { useBroLocation } from 'helpers/location.helper';
+import ComposeBroNote from './modals/ComposeBroNote.modal';
 
 const AppBarContainer = styled.div`
   position: fixed;
@@ -19,9 +21,18 @@ const IconContainer = styled.div`
 `;
 
 function AppBar(props) {
-  const { selectedFilter, setSelectedFilter, broLocation } = props;
+  const { selectedFilter, setSelectedFilter, refresh } = props;
+  const [openNewBroNote, setOpenNewBroNote] = useState(false);
+  const broLocation = useBroLocation();
+
   return (
     <AppBarContainer>
+      <ComposeBroNote
+        open={openNewBroNote}
+        broLocation={broLocation}
+        refresh={refresh}
+        onClose={() => setOpenNewBroNote(false)}
+      />
       <IconContainer>
         <Icon
           style={{ marginLeft: 16 }}
@@ -57,11 +68,13 @@ function AppBar(props) {
 
       <IconContainer>
         <Icon
+          disabled={!broLocation}
           style={{ marginRight: 16 }}
           size="large"
           inverted
           color="grey"
           name="edit"
+          onClick={() => setOpenNewBroNote(true)}
         />
       </IconContainer>
     </AppBarContainer>
