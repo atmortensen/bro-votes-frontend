@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
-import { Modal, Input, Button } from 'semantic-ui-react';
+import { Modal, Input, Button, Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 import http from 'helpers/http.helper';
 
 function ComposeBroNote(props) {
   const { open, onClose, broLocation, refresh } = props;
 
+  const [error, setError] = useState('');
   const [broNote, setBroNote] = useState('');
 
   const postBro = () => {
-    http()
-      .post(`/bro-notes`, {
-        latitude: broLocation.lat,
-        longitude: broLocation.long,
-        note: broNote
-      })
-      .then(() => {
-        onClose();
-        refresh();
-      })
-      .catch(e => alert(e));
+    if (broNote.length > 140) {
+      setError('Too long of a bro, bro.');
+    } else {
+      http()
+        .post(`/bro-notes`, {
+          latitude: broLocation.lat,
+          longitude: broLocation.long,
+          note: broNote
+        })
+        .then(() => {
+          onClose();
+          refresh();
+        })
+        .catch(e => setError(error));
+    }
   };
 
   const BroCount = styled.p`
@@ -27,13 +32,14 @@ function ComposeBroNote(props) {
     margin-left: 2px;
     font-family: roboto;
     font-size: 10px;
-    color: ${broNote.length > 10 ? '#FF0000' : '#A6A6A6'};
+    color: ${broNote.length > 140 ? '#FF0000' : '#A6A6A6'};
   `;
 
   return (
     <Modal open={open}>
       <Modal.Header>Bro Note</Modal.Header>
       <Modal.Content>
+        {error && <Header>{error}</Header>}
         <Input
           fluid
           onChange={e => setBroNote(e.target.value)}
@@ -44,7 +50,9 @@ function ComposeBroNote(props) {
           style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 16 }}
         >
           <Button onClick={onClose}>cancel</Button>
-          <Button onClick={postBro}>submit</Button>
+          <Button disabled={!broNote} onClick={postBro}>
+            submit
+          </Button>
         </div>
       </Modal.Content>
     </Modal>

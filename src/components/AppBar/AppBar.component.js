@@ -49,7 +49,7 @@ function AppBar(props) {
           inverted
           color="grey"
           size="large"
-          name="cog"
+          name="sign-out"
         />
       </IconContainer>
 
@@ -83,7 +83,7 @@ function AppBar(props) {
           size="large"
           inverted
           color="grey"
-          name="edit"
+          name="paper plane outline"
           onClick={() => setOpenNewBroNote(true)}
         />
       </IconContainer>
