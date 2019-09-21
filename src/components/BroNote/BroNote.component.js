@@ -1,7 +1,9 @@
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
+import React, { useContext } from 'react';
+import { Icon, Header } from 'semantic-ui-react';
 import moment from 'moment';
 import styled from 'styled-components';
+import http from 'helpers/http.helper';
+import { BroContext } from 'contexts/Bro.context';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -43,7 +45,18 @@ const NoteTime = styled.p`
 `;
 
 function BroNote(props) {
-  const { note } = props;
+  const { note, refresh } = props;
+  const { bro } = useContext(BroContext);
+  const broCount = note.yaBros.length - note.noBros.length;
+
+  const castBroVote = value => {
+    http()
+      .post(`/bro-votes`, {
+        broNoteId: note._id,
+        value: value
+      })
+      .then(() => refresh());
+  };
 
   return (
     <ListContainer>
@@ -52,20 +65,33 @@ function BroNote(props) {
           <Note>{note.note}</Note>
         </div>
         <div style={{ width: '100%' }}>
-          <NoteTime>{moment(note.created).format('LLL')}</NoteTime>
+          <NoteTime>{moment(note.created).fromNow()}</NoteTime>
         </div>
       </NoteContainer>
 
       <BroVoteContainer>
         <div style={{ margin: 'auto' }}>
           <div style={{ width: '100%', marginLeft: 4 }}>
-            <Icon name="chevron up" />
+            <Icon
+              name="chevron up"
+              color={note.yaBros.includes(bro._id) ? 'green' : 'grey'}
+              onClick={() => castBroVote(1)}
+            />
           </div>
           <div style={{ width: '100%', textAlign: 'center' }}>
-            <p>187</p>
+            <Header
+              as="h4"
+              color={broCount < 0 ? 'red' : broCount > 0 ? 'green' : 'grey'}
+            >
+              {broCount}
+            </Header>
           </div>
           <div style={{ width: '100%', marginLeft: 4 }}>
-            <Icon name="chevron down" />
+            <Icon
+              name="chevron down"
+              color={note.noBros.includes(bro._id) ? 'red' : 'grey'}
+              onClick={() => castBroVote(-1)}
+            />
           </div>
         </div>
       </BroVoteContainer>
