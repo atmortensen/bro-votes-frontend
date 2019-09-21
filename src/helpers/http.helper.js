@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default () => {
   const instance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
-      Authorization: window.localStorage.getItem("token")
+      Authorization: window.localStorage.getItem('token')
     }
   });
 
@@ -13,12 +13,11 @@ export default () => {
       return response.data;
     },
     error => {
-      console.log(error.response.data.message);
       return error.response &&
         error.response.data &&
         error.response.data.message
         ? Promise.reject(error.response.data.message)
-        : Promise.reject("Brooo! Looks like a server error... try again later");
+        : Promise.reject('Brooo! Looks like a server error... try again later');
     }
   );
 

@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import { Input, Button, Message } from "semantic-ui-react";
-import logo from "../../assets/bros-login.png";
-import { colors } from "helpers/theme.helper";
-import http from "helpers/http.helper";
-import { BroContext } from "contexts/Bro.context";
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Input, Button, Message } from 'semantic-ui-react';
+import logo from '../../assets/bros-login.png';
+import { colors } from 'helpers/theme.helper';
+import http from 'helpers/http.helper';
+import { BroContext } from 'contexts/Bro.context';
 
 const View = styled.div`
   width: 100vw;
@@ -44,9 +44,9 @@ const Logo = styled.img`
 `;
 
 function Login(props) {
-  const [handle, setHandle] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [handle, setHandle] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { setBro } = useContext(BroContext);
 
   const login = () => {
@@ -56,7 +56,7 @@ function Login(props) {
         password: password
       })
       .then(res => {
-        window.localStorage.setItem("token", res.token);
+        window.localStorage.setItem('token', res.token);
         setBro(res);
       })
       .catch(err => setError(err));
@@ -69,7 +69,7 @@ function Login(props) {
       </HeaderContainer>
 
       <LoginContainer>
-        <div style={{ margin: "auto", padding: 24 }}>
+        <div style={{ margin: 'auto', padding: 24 }}>
           {error && <Message color="red">{error}</Message>}
           <Input
             fluid
@@ -93,7 +93,7 @@ function Login(props) {
       </LoginContainer>
 
       <FooterContainer>
-        <a href="/sign-up" style={{ color: "#FFFFFF" }}>
+        <a href="/sign-up" style={{ color: '#FFFFFF' }}>
           sign up
         </a>
       </FooterContainer>

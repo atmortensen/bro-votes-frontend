@@ -1,12 +1,12 @@
-import { useContext, useEffect } from "react";
-import { BroLocationContext } from "contexts/BroLocation.context";
+import { useContext, useEffect } from 'react';
+import { BroLocationContext } from 'contexts/BroLocation.context';
 
 export function useBroLocation(props) {
   const { broLocation, setBroLocation } = useContext(BroLocationContext);
 
   useEffect(() => {
     if (!navigator || !navigator.geolocation) {
-      return alert("Your browser is not supported, sorry bro!");
+      return alert('Your browser is not supported, sorry bro!');
     }
     if (!broLocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -16,8 +16,8 @@ export function useBroLocation(props) {
         });
       });
 
-      navigator.permissions.query({ name: "geolocation" }).then(res => {
-        if (res.state === "denied") {
+      navigator.permissions.query({ name: 'geolocation' }).then(res => {
+        if (res.state === 'denied') {
           return alert(
             `Bro, you've disabled geolocation tracking. Enable it bro.`
           );

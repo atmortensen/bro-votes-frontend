@@ -1,22 +1,58 @@
-import React from "react";
-import { Menu } from "semantic-ui-react";
-import { colors } from "helpers/theme.helper";
-import { useBroLocation } from "helpers/location.helper";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useBroLocation } from 'helpers/location.helper';
+import { AppBar } from 'components';
+import { List } from 'semantic-ui-react';
+import moment from 'moment';
+import http from 'helpers/http.helper';
 
 function Home(props) {
+  const [error, setError] = useState('');
+  const [selectedFilter, setSelectedFilter] = useState('new');
+  const [broNotes, setBroNotes] = useState([]);
   const broLocation = useBroLocation();
-  console.log(broLocation);
+
+  const getBroNotes = useCallback(() => {
+    if (broLocation) {
+      http()
+        .get(
+          `/bro-notes?latitude=${broLocation.lat}&longitude=${broLocation.long}`
+        )
+        .then(res => {
+          setBroNotes(res);
+        })
+        .catch(err => setError(err));
+    }
+  }, [broLocation]);
+
+  useEffect(() => {
+    getBroNotes();
+  }, [getBroNotes]);
+
   return (
     <div>
-      <div
-        style={{
-          position: "static",
-          width: "100vw",
-          height: "60px",
-          backgroundColor: `${colors.secondaryAccent}`,
-          display: "flex"
-        }}
-      ></div>
+      <AppBar broLocation={broLocation} setSelectedFilter={setSelectedFilter} />
+      <div style={{ marginTop: 60 }}>
+        <List divided relaxed>
+          <List.Item>
+            <List.Header>This is a demo Bro Note.</List.Header>
+            <List.Description>
+              Created on {moment().format('LLL')}
+            </List.Description>
+          </List.Item>
+          <List.Item>
+            <List.Header>This is a demo Bro Note.</List.Header>
+            <List.Description>
+              Created on {moment().format('LLL')}
+            </List.Description>
+          </List.Item>
+          <List.Item>
+            <List.Header>This is a demo Bro Note.</List.Header>
+            <List.Description>
+              Created on {moment().format('LLL')}
+            </List.Description>
+          </List.Item>
+        </List>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import { Input, Button, Message } from "semantic-ui-react";
-import logo from "../../assets/bros-login.png";
-import { colors } from "helpers/theme.helper";
-import http from "helpers/http.helper";
-import { BroContext } from "contexts/Bro.context";
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Input, Button, Message } from 'semantic-ui-react';
+import logo from '../../assets/bros-login.png';
+import { colors } from 'helpers/theme.helper';
+import http from 'helpers/http.helper';
+import { BroContext } from 'contexts/Bro.context';
 
 const View = styled.div`
   width: 100vw;
@@ -44,10 +44,10 @@ const Logo = styled.img`
 `;
 
 function SignUp(props) {
-  const [error, setError] = useState("");
-  const [handle, setHandle] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState('');
+  const [handle, setHandle] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { setBro } = useContext(BroContext);
 
   const signUp = () => {
@@ -58,12 +58,12 @@ function SignUp(props) {
           password: password
         })
         .then(res => {
-          window.localStorage.setItem("token", res.token);
+          window.localStorage.setItem('token', res.token);
           setBro(res);
         })
         .catch(err => setError(err));
     } else if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      setError('Passwords do not match.');
     } else {
       setError("BRO!! you didn't enter a username or password");
     }
@@ -76,7 +76,7 @@ function SignUp(props) {
       </HeaderContainer>
 
       <LoginContainer>
-        <div style={{ margin: "auto", padding: 24 }}>
+        <div style={{ margin: 'auto', padding: 24 }}>
           {error && <Message color="red">{error}</Message>}
           <Input
             fluid
@@ -111,7 +111,7 @@ function SignUp(props) {
       </LoginContainer>
 
       <FooterContainer>
-        <a href="/" style={{ color: "#FFFFFF" }}>
+        <a href="/" style={{ color: '#FFFFFF' }}>
           login
         </a>
       </FooterContainer>

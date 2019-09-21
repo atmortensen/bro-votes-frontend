@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import http from "helpers/http.helper";
-import Login from "./Login/Login.route";
-import SignUp from "./SignUp/SignUp.route";
-import Home from "./Home/Home.route";
-import { BroContext } from "contexts/Bro.context";
+import React, { useState, useEffect, useContext } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import http from 'helpers/http.helper';
+import Login from './Login/Login.route';
+import SignUp from './SignUp/SignUp.route';
+import Home from './Home/Home.route';
+import { BroContext } from 'contexts/Bro.context';
 
 export default () => {
   const [loading, setLoading] = useState(true);
   const { bro, setBro } = useContext(BroContext);
 
   useEffect(() => {
-    if (window.localStorage.getItem("token")) {
+    if (window.localStorage.getItem('token')) {
       http()
         .get(`/bros/me`)
         .then(res => {
