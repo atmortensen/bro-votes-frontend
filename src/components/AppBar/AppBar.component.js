@@ -48,7 +48,7 @@ function AppBar(props) {
           style={{ marginLeft: 16 }}
           inverted
           size="large"
-          name="cog"
+          name="sign-out"
         />
       </IconContainer>
 
@@ -84,7 +84,7 @@ function AppBar(props) {
           style={{ marginRight: 16 }}
           size="large"
           inverted
-          name="edit"
+          name="paper plane outline"
           onClick={() => setOpenNewBroNote(true)}
         />
       </IconContainer>
