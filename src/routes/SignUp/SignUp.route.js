@@ -7,7 +7,7 @@ import http from 'helpers/http.helper';
 import { BroContext } from 'contexts/Bro.context';
 import { Link } from 'react-router-dom';
 
-const View = styled.form`
+const View = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${colors.secondaryAccent};
@@ -22,7 +22,7 @@ const HeaderContainer = styled.div`
   text-align: center;
 `;
 
-const LoginContainer = styled.div`
+const LoginContainer = styled.form`
   margin auto;
   border-radius: 10px;
   background-color: #ffffff;
@@ -72,12 +72,12 @@ function SignUp(props) {
   };
 
   return (
-    <View onSubmit={signUp}>
+    <View>
       <HeaderContainer>
         <Logo src={logo} alt="bro-vote-logo" />
       </HeaderContainer>
 
-      <LoginContainer>
+      <LoginContainer onSubmit={signUp}>
         <div style={{ margin: 'auto', padding: 24 }}>
           {error && <Message color="red">{error}</Message>}
           <Input
