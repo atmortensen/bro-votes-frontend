@@ -71,7 +71,7 @@ function Home(props) {
               position: 'fixed',
               top: '50%',
               left: '50%',
-              color: 'white'
+              color: 'black'
             }}
             size="medium"
           >
