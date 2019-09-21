@@ -7,7 +7,7 @@ import http from 'helpers/http.helper';
 import { BroContext } from 'contexts/Bro.context';
 import { Link } from 'react-router-dom';
 
-const View = styled.div`
+const View = styled.form`
   width: 100vw;
   height: 100vh;
   background: ${colors.secondaryAccent};

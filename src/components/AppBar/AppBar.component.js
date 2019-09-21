@@ -13,6 +13,10 @@ const AppBarContainer = styled.div`
   background-color: ${colors.secondaryAccent};
   display: flex;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  max-width: 500px;
+  margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const IconContainer = styled.div`

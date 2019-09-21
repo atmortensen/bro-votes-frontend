@@ -7,6 +7,8 @@ import { BroContext } from 'contexts/Bro.context';
 
 const ListContainer = styled.div`
   width: 100%;
+  max-width: 500px;
+  margin: auto;
   padding: 16px;
   display: flex;
   flex-wrap: nowrap;
