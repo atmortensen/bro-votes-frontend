@@ -44,7 +44,11 @@ function Home(props) {
         minHeight: '100vh'
       }}
     >
-      <AppBar broLocation={broLocation} setSelectedFilter={setSelectedFilter} />
+      <AppBar
+        broLocation={broLocation}
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+      />
       <div style={{ paddingTop: 8 }}>
         <List divided relaxed>
           {broNotes.map(note => (

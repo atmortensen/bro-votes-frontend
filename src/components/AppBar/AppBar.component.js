@@ -19,7 +19,7 @@ const IconContainer = styled.div`
 `;
 
 function AppBar(props) {
-  const { setSelectedFilter, broLocation } = props;
+  const { selectedFilter, setSelectedFilter, broLocation } = props;
   return (
     <AppBarContainer>
       <IconContainer>
@@ -34,9 +34,24 @@ function AppBar(props) {
 
       <div style={{ margin: 'auto' }}>
         <Button.Group size="mini">
-          <Button onClick={() => setSelectedFilter('hof')}>HoF</Button>
-          <Button onClick={() => setSelectedFilter('hot')}>Hot</Button>
-          <Button onClick={() => setSelectedFilter('new')}>New</Button>
+          <Button
+            active={selectedFilter === 'hof'}
+            onClick={() => setSelectedFilter('hof')}
+          >
+            HoF
+          </Button>
+          <Button
+            active={selectedFilter === 'hot'}
+            onClick={() => setSelectedFilter('hot')}
+          >
+            Hot
+          </Button>
+          <Button
+            active={selectedFilter === 'new'}
+            onClick={() => setSelectedFilter('new')}
+          >
+            New
+          </Button>
         </Button.Group>
       </div>
 
