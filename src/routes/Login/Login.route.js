@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Message } from "semantic-ui-react";
 import logo from "../../assets/bros-login.png";
 import { colors } from "helpers/theme.helper";
+import http from "helpers/http.helper";
+import { BroContext } from "contexts/Bro.context";
 
 const View = styled.div`
   width: 100vw;
@@ -42,8 +44,23 @@ const Logo = styled.img`
 `;
 
 function Login(props) {
-  const [username, setUsername] = useState("");
+  const [handle, setHandle] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { setBro } = useContext(BroContext);
+
+  const login = () => {
+    http()
+      .post(`/bros/sign-in`, {
+        handle: handle,
+        password: password
+      })
+      .then(res => {
+        window.localStorage.setItem("token", res.token);
+        setBro(res);
+      })
+      .catch(err => setError(err));
+  };
 
   return (
     <View>
@@ -53,19 +70,23 @@ function Login(props) {
 
       <LoginContainer>
         <div style={{ margin: "auto", padding: 24 }}>
+          {error && <Message color="red">{error}</Message>}
           <Input
             fluid
+            error={error ? true : false}
             placeholder="username"
-            onChange={e => setUsername(e.target.value)}
+            onChange={e => setHandle(e.target.value)}
           />
           <br />
           <Input
             fluid
+            error={error ? true : false}
+            type="password"
             placeholder="password"
             onChange={e => setPassword(e.target.value)}
           />
           <br />
-          <Button fluid color="yellow">
+          <Button fluid color="yellow" onClick={login}>
             Login
           </Button>
         </div>

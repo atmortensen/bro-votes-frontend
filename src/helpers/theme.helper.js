@@ -3,5 +3,6 @@ export const colors = {
   primaryAccent: "#FFD25A",
   secondary: "#FFAA5A",
   secondaryAccent: "#FF785A",
-  text: "#191919"
+  text: "#191919",
+  error: "FF0000"
 };

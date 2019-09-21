@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { Input, Button } from "semantic-ui-react";
 import logo from "../../assets/bros-login.png";
 import { colors } from "helpers/theme.helper";
+import http from "helpers/http.helper";
+import { BroContext } from "contexts/Bro.context";
 
 const View = styled.div`
   width: 100vw;
@@ -42,9 +44,22 @@ const Logo = styled.img`
 `;
 
 function SignUp(props) {
-  const [username, setUsername] = useState("");
+  const [handle, setHandle] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { setBro } = useContext(BroContext);
+
+  const signUp = () => {
+    http()
+      .post(`/bros/sign-up`, {
+        handle: handle,
+        password: password
+      })
+      .then(res => {
+        window.setToken("token", res.token);
+        setBro(res);
+      });
+  };
 
   return (
     <View>
@@ -57,7 +72,7 @@ function SignUp(props) {
           <Input
             fluid
             placeholder="username"
-            onChange={e => setUsername(e.target.value)}
+            onChange={e => setHandle(e.target.value)}
           />
           <br />
 

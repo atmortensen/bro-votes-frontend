@@ -1,13 +1,46 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import http from "helpers/http.helper";
 import Login from "./Login/Login.route";
 import SignUp from "./SignUp/SignUp.route";
+import Home from "./Home/Home.route";
+import { BroContext } from "contexts/Bro.context";
 
 export default () => {
-  return (
-    <Switch>
-      <Route path="/" exact component={Login} />
-      <Route path="/sign-up" exact component={SignUp} />
-    </Switch>
-  );
+  const [loading, setLoading] = useState(true);
+  const { bro, setBro } = useContext(BroContext);
+
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) {
+      http()
+        .get(`/bros/me`)
+        .then(res => {
+          setBro(res);
+        })
+        .catch(() => {
+          setBro(null);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+  }, [setBro]);
+
+  if (loading) return null;
+  if (!bro) {
+    return (
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <Route path="/sign-up" exact component={SignUp} />
+        <Route component={Login} />
+      </Switch>
+    );
+  } else {
+    return (
+      <Switch>
+        <Redirect from="/" exact to="/home" />
+        <Route path="/home" exact component={Home} />
+      </Switch>
+    );
+  }
 };
