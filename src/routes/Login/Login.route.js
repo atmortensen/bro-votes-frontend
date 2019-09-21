@@ -7,7 +7,7 @@ import http from 'helpers/http.helper';
 import { BroContext } from 'contexts/Bro.context';
 import { Link } from 'react-router-dom';
 
-const View = styled.div`
+const View = styled.form`
   width: 100vw;
   height: 100vh;
   background: ${colors.secondaryAccent};
@@ -50,7 +50,8 @@ function Login(props) {
   const [error, setError] = useState('');
   const { setBro } = useContext(BroContext);
 
-  const login = () => {
+  const login = e => {
+    e.preventDefault();
     http()
       .post(`/bros/sign-in`, {
         handle: handle,
@@ -64,7 +65,7 @@ function Login(props) {
   };
 
   return (
-    <View>
+    <View onSubmit={login}>
       <HeaderContainer>
         <Logo src={logo} alt="bro-vote-logo" />
       </HeaderContainer>
@@ -87,7 +88,7 @@ function Login(props) {
             onChange={e => setPassword(e.target.value)}
           />
           <br />
-          <Button fluid color="yellow" onClick={login}>
+          <Button fluid color="yellow" type="submit">
             Login
           </Button>
         </div>

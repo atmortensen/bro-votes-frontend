@@ -47,7 +47,6 @@ function AppBar(props) {
           onClick={signThisBroOut}
           style={{ marginLeft: 16 }}
           inverted
-          color="grey"
           size="large"
           name="cog"
         />
@@ -82,7 +81,6 @@ function AppBar(props) {
           style={{ marginRight: 16 }}
           size="large"
           inverted
-          color="grey"
           name="edit"
           onClick={() => setOpenNewBroNote(true)}
         />

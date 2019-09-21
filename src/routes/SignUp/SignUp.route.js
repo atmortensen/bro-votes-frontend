@@ -51,7 +51,8 @@ function SignUp(props) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { setBro } = useContext(BroContext);
 
-  const signUp = () => {
+  const signUp = e => {
+    e.preventDefault();
     if (password === confirmPassword && password && handle) {
       http()
         .post(`/bros/sign-up`, {
@@ -71,7 +72,7 @@ function SignUp(props) {
   };
 
   return (
-    <View>
+    <View onSubmit={signUp}>
       <HeaderContainer>
         <Logo src={logo} alt="bro-vote-logo" />
       </HeaderContainer>
@@ -105,7 +106,7 @@ function SignUp(props) {
           />
           <br />
 
-          <Button fluid color="yellow" onClick={signUp}>
+          <Button fluid color="yellow" type="submit">
             Sign Up
           </Button>
         </div>
