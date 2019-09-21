@@ -14,7 +14,10 @@ export default () => {
       http()
         .get(`/bros/me`)
         .then(res => setBro(res))
-        .catch(() => setBro(null));
+        .catch(() => {
+          window.localStorage.removeItem('token');
+          setBro(null);
+        });
     }
   }, [setBro]);
 
