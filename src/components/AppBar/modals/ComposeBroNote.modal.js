@@ -18,7 +18,8 @@ function ComposeBroNote(props) {
       .then(() => {
         onClose();
         refresh();
-      });
+      })
+      .catch(e => alert(e));
   };
 
   const BroCount = styled.p`

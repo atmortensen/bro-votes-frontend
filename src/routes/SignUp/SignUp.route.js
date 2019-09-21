@@ -5,6 +5,7 @@ import logo from '../../assets/bros-login.png';
 import { colors } from 'helpers/theme.helper';
 import http from 'helpers/http.helper';
 import { BroContext } from 'contexts/Bro.context';
+import { Link } from 'react-router-dom';
 
 const View = styled.div`
   width: 100vw;
@@ -111,9 +112,9 @@ function SignUp(props) {
       </LoginContainer>
 
       <FooterContainer>
-        <a href="/" style={{ color: '#FFFFFF' }}>
+        <Link to="/" style={{ color: '#FFFFFF' }}>
           login
-        </a>
+        </Link>
       </FooterContainer>
     </View>
   );

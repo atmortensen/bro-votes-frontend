@@ -56,7 +56,8 @@ function BroNote(props) {
         broNoteId: note._id,
         value: value
       })
-      .then(() => refresh());
+      .then(() => refresh())
+      .catch(e => alert(e));
   };
 
   return (
