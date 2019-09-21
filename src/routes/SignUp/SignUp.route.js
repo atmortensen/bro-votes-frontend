@@ -11,6 +11,7 @@ const View = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${colors.secondaryAccent};
+  position: relative;
 `;
 
 const HeaderContainer = styled.div`
@@ -35,7 +36,7 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  bottom: 40px;
+  bottom: 20px;
 `;
 
 const Logo = styled.img`
