@@ -1,45 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Input, Button } from "semantic-ui-react";
+import logo from "../../assets/bros-login.png";
 
 const View = styled.div`
-  margin: 0;
   width: 100vw;
   height: 100vh;
   background: #ff785a;
+`;
+
+const HeaderContainer = styled.div`
   display: flex;
+  height: 50vh;
+  margin: auto;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
 `;
 
 const LoginContainer = styled.div`
   margin auto;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #ffffff;
   width: 100%;
   max-width: 300px;
 `;
 
+const FooterContainer = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 20px;
+`;
+
 const Logo = styled.img`
-  margin: auto;
   max-width: 100%;
   display: block;
+  margin-bottom: 40px;
 `;
 
 function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View>
-      {/* <div>
-        <Logo
-          src="https://s3-us-west-2.amazonaws.com/name-tba/logo.png"
-          alt="bro-votes-logo"
-        />
-        </div> 
-        */}
+      <HeaderContainer>
+        <Logo src={logo} alt="bro-vote-logo" />
+      </HeaderContainer>
 
       <LoginContainer>
-        <div style={{ margin: "auto", padding: 16 }}>
-          <Input fluid placeholder="username" />
+        <div style={{ margin: "auto", padding: 24 }}>
+          <Input
+            fluid
+            placeholder="username"
+            onChange={e => setUsername(e.target.value)}
+          />
           <br />
-          <Input fluid placeholder="password" />
+          <Input
+            fluid
+            placeholder="password"
+            onChange={e => setPassword(e.target.value)}
+          />
           <br />
           <Button fluid color="twitter">
             Login
@@ -47,11 +70,11 @@ function Login(props) {
         </div>
       </LoginContainer>
 
-      <div style={{ position: "absolute", left: "48%", bottom: 10 }}>
+      <FooterContainer>
         <a href="/sign-up" style={{ color: "#FFFFFF" }}>
           sign up
         </a>
-      </div>
+      </FooterContainer>
     </View>
   );
 }
