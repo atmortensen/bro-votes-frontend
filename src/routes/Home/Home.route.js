@@ -30,6 +30,10 @@ function Home(props) {
       a = new Date(a.created);
       b = new Date(b.created);
       return a > b ? -1 : 1;
+    } else {
+      a = a.yaBros.length - a.noBros.length;
+      b = b.yaBros.length - b.noBros.length;
+      return a > b ? -1 : 1;
     }
   };
 
