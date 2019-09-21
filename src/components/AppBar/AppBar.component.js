@@ -53,24 +53,27 @@ function AppBar(props) {
       </IconContainer>
 
       <div style={{ margin: 'auto' }}>
-        <Button.Group size="mini">
+        <Button.Group size="small">
           <Button
             active={selectedFilter === 'hof'}
+            color={selectedFilter === 'hof' && 'yellow'}
             onClick={() => setSelectedFilter('hof')}
           >
-            HoF
+            <Icon name="trophy" />
           </Button>
           <Button
             active={selectedFilter === 'hot'}
+            color={selectedFilter === 'hot' && 'yellow'}
             onClick={() => setSelectedFilter('hot')}
           >
-            Hot
+            <Icon name="fire" />
           </Button>
           <Button
             active={selectedFilter === 'new'}
+            color={selectedFilter === 'new' && 'yellow'}
             onClick={() => setSelectedFilter('new')}
           >
-            New
+            <Icon name="bullhorn" />
           </Button>
         </Button.Group>
       </div>
