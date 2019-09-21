@@ -7,12 +7,11 @@ import Home from './Home/Home.route';
 import { BroContext } from 'contexts/Bro.context';
 
 export default () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { bro, setBro } = useContext(BroContext);
 
   useEffect(() => {
     if (window.localStorage.getItem('token')) {
-      setLoading(true);
       http()
         .get(`/bros/me`)
         .then(res => setBro(res))
@@ -21,6 +20,8 @@ export default () => {
           setBro(null);
         })
         .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
     }
   }, [setBro]);
 
