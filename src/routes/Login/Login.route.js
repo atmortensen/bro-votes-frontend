@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Input, Button } from "semantic-ui-react";
 import logo from "../../assets/bros-login.png";
+import { colors } from "helpers/theme.helper";
 
 const View = styled.div`
   width: 100vw;
   height: 100vh;
-  background: #ff785a;
+  background: ${colors.secondaryAccent};
 `;
 
 const HeaderContainer = styled.div`
@@ -64,7 +65,7 @@ function Login(props) {
             onChange={e => setPassword(e.target.value)}
           />
           <br />
-          <Button fluid color="twitter">
+          <Button fluid color="yellow">
             Login
           </Button>
         </div>
