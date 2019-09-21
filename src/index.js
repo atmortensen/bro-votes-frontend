@@ -5,14 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 import BroContextProvider from "contexts/Bro.context";
+import BroLocationProvider from "contexts/BroLocation.context";
 
 class App extends React.Component {
   render() {
     return (
       <BroContextProvider>
-        <BrowserRouter>
-          <Routes />
-        </BrowserRouter>
+        <BroLocationProvider>
+          <BrowserRouter>
+            <Routes />
+          </BrowserRouter>
+        </BroLocationProvider>
       </BroContextProvider>
     );
   }
