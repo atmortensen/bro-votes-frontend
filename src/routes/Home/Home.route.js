@@ -4,6 +4,7 @@ import { AppBar } from 'components';
 import { List } from 'semantic-ui-react';
 import moment from 'moment';
 import http from 'helpers/http.helper';
+import { BroNote } from 'components';
 
 function Home(props) {
   const [error, setError] = useState('');
@@ -24,33 +25,22 @@ function Home(props) {
     }
   }, [broLocation]);
 
+  // const _renderFilter = useCallback(() => {
+  //   broNotes.
+  // }, [selectedFilter]);
+
   useEffect(() => {
     getBroNotes();
   }, [getBroNotes]);
+
+  console.log(broNotes);
 
   return (
     <div>
       <AppBar broLocation={broLocation} setSelectedFilter={setSelectedFilter} />
       <div style={{ marginTop: 60 }}>
         <List divided relaxed>
-          <List.Item>
-            <List.Header>This is a demo Bro Note.</List.Header>
-            <List.Description>
-              Created on {moment().format('LLL')}
-            </List.Description>
-          </List.Item>
-          <List.Item>
-            <List.Header>This is a demo Bro Note.</List.Header>
-            <List.Description>
-              Created on {moment().format('LLL')}
-            </List.Description>
-          </List.Item>
-          <List.Item>
-            <List.Header>This is a demo Bro Note.</List.Header>
-            <List.Description>
-              Created on {moment().format('LLL')}
-            </List.Description>
-          </List.Item>
+          <BroNote />
         </List>
       </div>
     </div>

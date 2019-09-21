@@ -1,21 +1,27 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import { colors } from 'helpers/theme.helper';
+import styled from 'styled-components';
+
+const AppBarContainer = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 60px;
+  background-color: ${colors.secondaryAccent};
+  display: flex;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 function AppBar(props) {
   const { setSelectedFilter, broLocation } = props;
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        width: '100vw',
-        height: '60px',
-        backgroundColor: `${colors.secondaryAccent}`,
-        display: 'flex'
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+    <AppBarContainer>
+      <IconContainer>
         <Icon
           style={{ marginLeft: 16 }}
           inverted
@@ -23,7 +29,8 @@ function AppBar(props) {
           size="large"
           name="cog"
         />
-      </div>
+      </IconContainer>
+
       <div style={{ margin: 'auto' }}>
         <Button.Group size="mini">
           <Button onClick={() => setSelectedFilter('hof')}>HoF</Button>
@@ -32,7 +39,7 @@ function AppBar(props) {
         </Button.Group>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <IconContainer>
         <Icon
           style={{ marginRight: 16 }}
           size="large"
@@ -40,8 +47,8 @@ function AppBar(props) {
           color="grey"
           name="edit"
         />
-      </div>
-    </div>
+      </IconContainer>
+    </AppBarContainer>
   );
 }
 
