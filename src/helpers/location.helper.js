@@ -16,17 +16,17 @@ export function useBroLocation(props) {
         });
       });
 
-      if (window.navigator.permissions.query) {
-        window.navigator.permissions
-          .query({ name: 'geolocation' })
-          .then(res => {
-            if (res.state === 'denied') {
-              return alert(
-                `Bro, you've disabled geolocation tracking. Enable it bro.`
-              );
-            }
-          });
-      }
+      // if (window.navigator.permissions.query) {
+      //   window.navigator.permissions
+      //     .query({ name: 'geolocation' })
+      //     .then(res => {
+      //       if (res.state === 'denied') {
+      //         return alert(
+      //           `Bro, you've disabled geolocation tracking. Enable it bro.`
+      //         );
+      //       }
+      //     });
+      // }
     }
   });
 
