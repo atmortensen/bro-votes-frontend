@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useBroLocation } from 'helpers/location.helper';
 import { AppBar } from 'components';
-import { List } from 'semantic-ui-react';
+import { List, Segment, Dimmer, Loader } from 'semantic-ui-react';
 import http from 'helpers/http.helper';
 import { BroNote } from 'components';
 import { colors } from 'helpers/theme.helper';
@@ -63,11 +63,29 @@ function Home(props) {
         setSelectedFilter={setSelectedFilter}
       />
       <div style={{ paddingTop: 8 }}>
-        <List divided relaxed>
-          {broNotes.sort(sortFunction).map(note => (
-            <BroNote key={note._id} note={note} refresh={getBroNotes} />
-          ))}
-        </List>
+        {!broNotes.length ? (
+          <Loader
+            active
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              color: 'white'
+            }}
+            size="medium"
+          >
+            It's, loading, chill bro...
+          </Loader>
+        ) : (
+          <List divided relaxed>
+            {broNotes
+              .filter(item => selectedFilter !== 'hof' || item.superBroNote)
+              .sort(sortFunction)
+              .map(note => (
+                <BroNote key={note._id} note={note} refresh={getBroNotes} />
+              ))}
+          </List>
+        )}
       </div>
     </div>
   );
