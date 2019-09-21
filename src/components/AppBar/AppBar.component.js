@@ -60,21 +60,21 @@ function AppBar(props) {
         <Button.Group size="small">
           <Button
             active={selectedFilter === 'hof'}
-            color={selectedFilter === 'hof' && 'yellow'}
+            color={selectedFilter === 'hof' ? 'yellow' : undefined}
             onClick={() => setSelectedFilter('hof')}
           >
             <Icon name="trophy" />
           </Button>
           <Button
             active={selectedFilter === 'hot'}
-            color={selectedFilter === 'hot' && 'yellow'}
+            color={selectedFilter === 'hot' ? 'yellow' : undefined}
             onClick={() => setSelectedFilter('hot')}
           >
             <Icon name="fire" />
           </Button>
           <Button
             active={selectedFilter === 'new'}
-            color={selectedFilter === 'new' && 'yellow'}
+            color={selectedFilter === 'new' ? 'yellow' : undefined}
             onClick={() => setSelectedFilter('new')}
           >
             <Icon name="bullhorn" />
