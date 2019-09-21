@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Message } from "semantic-ui-react";
 import logo from "../../assets/bros-login.png";
 import { colors } from "helpers/theme.helper";
 import http from "helpers/http.helper";
@@ -44,21 +44,29 @@ const Logo = styled.img`
 `;
 
 function SignUp(props) {
+  const [error, setError] = useState("");
   const [handle, setHandle] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { setBro } = useContext(BroContext);
 
   const signUp = () => {
-    http()
-      .post(`/bros/sign-up`, {
-        handle: handle,
-        password: password
-      })
-      .then(res => {
-        window.setToken("token", res.token);
-        setBro(res);
-      });
+    if (password === confirmPassword && password && handle) {
+      http()
+        .post(`/bros/sign-up`, {
+          handle: handle,
+          password: password
+        })
+        .then(res => {
+          window.localStorage.setItem("token", res.token);
+          setBro(res);
+        })
+        .catch(err => setError(err));
+    } else if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+    } else {
+      setError("BRO!! you didn't enter a username or password");
+    }
   };
 
   return (
@@ -69,8 +77,10 @@ function SignUp(props) {
 
       <LoginContainer>
         <div style={{ margin: "auto", padding: 24 }}>
+          {error && <Message color="red">{error}</Message>}
           <Input
             fluid
+            error={error ? true : false}
             placeholder="username"
             onChange={e => setHandle(e.target.value)}
           />
@@ -78,19 +88,23 @@ function SignUp(props) {
 
           <Input
             fluid
+            error={error ? true : false}
             placeholder="password"
+            type="password"
             onChange={e => setPassword(e.target.value)}
           />
           <br />
 
           <Input
             fluid
+            error={error ? true : false}
             placeholder="confirm password"
+            type="password"
             onChange={e => setConfirmPassword(e.target.value)}
           />
           <br />
 
-          <Button fluid color="yellow">
+          <Button fluid color="yellow" onClick={signUp}>
             Sign Up
           </Button>
         </div>

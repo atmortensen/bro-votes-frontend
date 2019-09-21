@@ -39,6 +39,7 @@ export default () => {
     return (
       <Switch>
         <Redirect from="/" exact to="/home" />
+        <Redirect from="/sign-up" exact to="/home" />
         <Route path="/home" exact component={Home} />
       </Switch>
     );
