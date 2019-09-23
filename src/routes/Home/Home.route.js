@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useBroLocation } from 'helpers/location.helper';
 import { AppBar } from 'components';
 import { List, Loader } from 'semantic-ui-react';
 import http from 'helpers/http.helper';
@@ -10,7 +9,6 @@ import io from 'socket.io-client';
 function Home(props) {
   const [selectedFilter, setSelectedFilter] = useState('new');
   const [broNotes, setBroNotes] = useState([]);
-  const broLocation = useBroLocation();
 
   useEffect(() => {
     const socket = io.connect(process.env.REACT_APP_API_URL);
@@ -20,17 +18,13 @@ function Home(props) {
   });
 
   const getBroNotes = useCallback(() => {
-    if (broLocation) {
-      http()
-        .get(
-          `/bro-notes?latitude=${broLocation.lat}&longitude=${broLocation.long}`
-        )
-        .then(res => {
-          setBroNotes(res);
-        })
-        .catch(err => alert(err));
-    }
-  }, [broLocation]);
+    http()
+      .get(`/bro-notes`)
+      .then(res => {
+        setBroNotes(res);
+      })
+      .catch(err => alert(err));
+  }, []);
 
   const sortFunction = (a, b) => {
     if (selectedFilter === 'new') {
@@ -59,7 +53,6 @@ function Home(props) {
     >
       <AppBar
         refresh={getBroNotes}
-        broLocation={broLocation}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
       />

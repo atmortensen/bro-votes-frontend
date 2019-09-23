@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import http from 'helpers/http.helper';
 
 function ComposeBroNote(props) {
-  const { open, onClose, broLocation, refresh } = props;
+  const { open, onClose, refresh } = props;
 
   const [error, setError] = useState('');
   const [broNote, setBroNote] = useState('');
@@ -15,8 +15,6 @@ function ComposeBroNote(props) {
     } else {
       http()
         .post(`/bro-notes`, {
-          latitude: broLocation.lat,
-          longitude: broLocation.long,
           note: broNote
         })
         .then(() => {
