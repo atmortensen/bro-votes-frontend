@@ -77,6 +77,7 @@ function BroNote(props) {
         <div style={{ margin: 'auto' }}>
           <div style={{ width: '100%', marginLeft: 4 }}>
             <Icon
+              style={{ cursor: 'pointer' }}
               name="chevron up"
               color={note.yaBros.includes(bro._id) ? 'green' : 'grey'}
               onClick={() => castBroVote(1)}
@@ -92,6 +93,7 @@ function BroNote(props) {
           </div>
           <div style={{ width: '100%', marginLeft: 4 }}>
             <Icon
+              style={{ cursor: 'pointer' }}
               name="chevron down"
               color={note.noBros.includes(bro._id) ? 'red' : 'grey'}
               onClick={() => castBroVote(-1)}
