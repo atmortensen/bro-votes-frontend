@@ -37,6 +37,7 @@ const Note = styled.p`
   font-size: 14px;
   font-weight: 600;
   color: #00000;
+  word-break: break-all;
 `;
 
 const NoteTime = styled.p`
