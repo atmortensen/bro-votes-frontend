@@ -6,6 +6,7 @@ import { colors } from 'helpers/theme.helper';
 import http from 'helpers/http.helper';
 import { BroContext } from 'contexts/Bro.context';
 import { Link } from 'react-router-dom';
+import Recaptcha from 'react-recaptcha';
 
 const View = styled.div`
   width: 100vw;
@@ -16,8 +17,8 @@ const View = styled.div`
 
 const HeaderContainer = styled.div`
   display: flex;
-  height: 50vh;
   margin: auto;
+  padding-top: 40px;
   justify-content: center;
   align-items: flex-end;
   text-align: center;
@@ -40,7 +41,7 @@ const FooterContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  max-width: 100%;
+  width: 125px;
   display: block;
   margin-bottom: 40px;
 `;
@@ -50,6 +51,7 @@ function SignUp(props) {
   const [handle, setHandle] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [verified, setVerified] = useState(false);
   const { setBro } = useContext(BroContext);
 
   const signUp = e => {
@@ -106,8 +108,13 @@ function SignUp(props) {
             onChange={e => setConfirmPassword(e.target.value)}
           />
           <br />
+          <Recaptcha
+            sitekey="6Ldf_LkUAAAAAFH-wCtaQVNnKTYdohue7g_TiWUh"
+            verifyCallback={() => setVerified(true)}
+            className="brovotes-recaptcha"
+          />
 
-          <Button fluid color="yellow" type="submit">
+          <Button fluid color="yellow" type="submit" disabled={!verified}>
             Sign Up
           </Button>
         </div>

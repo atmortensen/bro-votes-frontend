@@ -16,8 +16,8 @@ const View = styled.form`
 
 const HeaderContainer = styled.div`
   display: flex;
-  height: 50vh;
   margin: auto;
+  padding-top: 40px;
   justify-content: center;
   align-items: flex-end;
   text-align: center;
@@ -40,7 +40,7 @@ const FooterContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  max-width: 100%;
+  max-width: 125px;
   display: block;
   margin-bottom: 40px;
 `;
