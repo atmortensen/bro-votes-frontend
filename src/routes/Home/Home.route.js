@@ -1,10 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AppBar } from 'components';
-import { List, Loader } from 'semantic-ui-react';
+import { List, Loader, Modal } from 'semantic-ui-react';
 import http from 'helpers/http.helper';
 import { BroNote } from 'components';
 import { colors } from 'helpers/theme.helper';
 import io from 'socket.io-client';
+import styled from 'styled-components';
+
+const Footer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #eaae00;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  max-width: 500px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+`;
 
 function Home(props) {
   const [selectedFilter, setSelectedFilter] = useState('new');
@@ -85,6 +104,30 @@ function Home(props) {
           </List>
         )}
       </div>
+      <Modal trigger={<Footer>How to use BroVotes</Footer>}>
+        <Modal.Header>How to use BroVotes</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <p>
+              Create a BroNote by clicking on the icon in the upper right hand
+              corner.
+            </p>
+            <p>
+              UpBro and DownBro other Bro's BroNotes and try to get on the Bros
+              of Fame board.
+            </p>
+            <p>
+              If your BroNote gets more than 5 DownBros your post will be
+              deleted and your account will be suspended for 30 minutes.
+            </p>
+            <p>
+              Any BroNotes that get into the Bros of Fame after 24 hours will be
+              removed.
+            </p>
+            <p>- Stay Classy Bros ❤️</p>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
     </div>
   );
 }
