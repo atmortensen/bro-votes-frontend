@@ -60,7 +60,8 @@ function SignUp(props) {
       http()
         .post(`/bros/sign-up`, {
           handle: handle,
-          password: password
+          password: password,
+          recaptcha: verified
         })
         .then(res => {
           window.localStorage.setItem('token', res.token);
@@ -110,7 +111,7 @@ function SignUp(props) {
           <br />
           <Recaptcha
             sitekey="6Ldf_LkUAAAAAFH-wCtaQVNnKTYdohue7g_TiWUh"
-            verifyCallback={() => setVerified(true)}
+            verifyCallback={token => setVerified(token)}
             className="brovotes-recaptcha"
           />
 
