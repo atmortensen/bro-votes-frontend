@@ -124,6 +124,10 @@ function Home(props) {
               Any BroNotes that don't get into the Bros of Fame after 24 hours
               will be removed.
             </p>
+            <p>
+              If you have any other questions or suggestions, please email
+              thebrovotes@gmail.com
+            </p>
             <p>- Stay Classy Bros ❤️</p>
           </Modal.Description>
         </Modal.Content>
