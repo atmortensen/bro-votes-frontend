@@ -121,8 +121,8 @@ function Home(props) {
               deleted and your account will be suspended for 30 minutes.
             </p>
             <p>
-              Any BroNotes that get into the Bros of Fame after 24 hours will be
-              removed.
+              Any BroNotes that don't get into the Bros of Fame after 24 hours
+              will be removed.
             </p>
             <p>- Stay Classy Bros ❤️</p>
           </Modal.Description>
