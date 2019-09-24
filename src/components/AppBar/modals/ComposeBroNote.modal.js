@@ -12,6 +12,8 @@ function ComposeBroNote(props) {
   const postBro = () => {
     if (broNote.length > 140) {
       setError('Too long of a bro, bro.');
+    } else if (broNote.includes('<script>')) {
+      setError('U trYnA B a bIg HaCkeR GuY Huh! to_Ot');
     } else {
       http()
         .post(`/bro-notes`, {
